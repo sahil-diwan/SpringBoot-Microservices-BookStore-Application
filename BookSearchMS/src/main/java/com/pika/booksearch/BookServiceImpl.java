@@ -25,15 +25,16 @@ public class BookServiceImpl implements BookService {
 	public List<Book> getBooks(String author, String category) {
 		// TODO Auto-generated method stub
 		List<Book> myBooks = new ArrayList<>();
-		if (author.equals("All Authors") & category.equals("All Categories")) {
+		if(author.equals("All Authors") && category.equals("All Categories")) {
 			myBooks = bookDAO.findAll();
-		}
-		if (!author.equals("All Authors") && category.equals("All Categories")) {
+			}else if(author.equals("All Authors") && ! category.equals("All Categories")) {
+			myBooks = bookDAO.getBooksByCategory(category);
+			} else if( ! author.equals("All Authors") && category.equals("All Categories")) {
 			myBooks = bookDAO.getBooksByAuthor(author);
-		} else {
+			}else {
 			myBooks = bookDAO.getBooksByAuthorAndCategory(author, category);
-		}
-		return myBooks;
+			}
+			return myBooks; 
 	}
 
 	@Override
